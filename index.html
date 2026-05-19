@@ -413,6 +413,24 @@ footer{background:var(--dark);padding:22px 16px}
 .pay-item.amex{color:#006fcf;font-size:0.5rem;font-weight:800}
 .pay-item.pix{color:#32bcad;font-weight:800}
 .pay-item.boleto{font-family:monospace;font-size:0.6rem}
+
+/* ===== MENU LATERAL CATEGORIAS ===== */
+.menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;opacity:0;pointer-events:none;transition:opacity 0.3s}
+.menu-overlay.open{opacity:1;pointer-events:all}
+.menu-drawer{position:fixed;top:0;right:-320px;width:300px;height:100%;background:white;z-index:1000;transition:right 0.3s ease;box-shadow:-4px 0 20px rgba(0,0,0,0.15);display:flex;flex-direction:column}
+.menu-drawer.open{right:0}
+.menu-header{background:var(--teal);color:white;padding:18px 16px;display:flex;justify-content:space-between;align-items:center}
+.menu-header h3{font-family:'Pacifico',cursive;font-size:1.1rem;margin:0}
+.menu-close{background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;padding:0}
+.menu-body{padding:16px;flex:1;overflow-y:auto}
+.menu-cat-item{display:flex;align-items:center;gap:12px;padding:14px 12px;border-radius:12px;cursor:pointer;transition:background 0.2s;margin-bottom:8px;border:1px solid var(--teal-l)}
+.menu-cat-item:hover{background:var(--teal-l)}
+.menu-cat-icon{font-size:1.8rem;width:44px;height:44px;background:var(--teal-l);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.menu-cat-info{flex:1}
+.menu-cat-name{font-weight:700;color:var(--dark);font-size:0.95rem}
+.menu-cat-qty{font-size:0.75rem;color:var(--muted)}
+.menu-footer{padding:16px;border-top:1px solid var(--teal-l);text-align:center}
+.menu-footer p{font-size:0.75rem;color:var(--muted)}
 </style>
 
 <!-- FONTES -->
@@ -423,6 +441,63 @@ footer{background:var(--dark);padding:22px 16px}
 <!-- ============================================================ -->
 <div class="page active" id="pageHome">
 
+<!-- MENU LATERAL -->
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+<div class="menu-drawer" id="menuDrawer">
+  <div class="menu-header">
+    <h3>🐾 Categorias</h3>
+    <button class="menu-close" onclick="closeMenu()">✕</button>
+  </div>
+  <div class="menu-body">
+    <div class="menu-cat-item" onclick="closeMenu();goPage('home')">
+      <div class="menu-cat-icon">👔</div>
+      <div class="menu-cat-info">
+        <div class="menu-cat-name">Gravatas & Laços</div>
+        <div class="menu-cat-qty">34 produtos</div>
+      </div>
+    </div>
+    <div class="menu-cat-item" onclick="closeMenu();goPage('home')">
+      <div class="menu-cat-icon">🎀</div>
+      <div class="menu-cat-info">
+        <div class="menu-cat-name">Bandanas</div>
+        <div class="menu-cat-qty">28 produtos</div>
+      </div>
+    </div>
+    <div class="menu-cat-item" onclick="closeMenu();goPage('home')">
+      <div class="menu-cat-icon">👕</div>
+      <div class="menu-cat-info">
+        <div class="menu-cat-name">Roupinhas</div>
+        <div class="menu-cat-qty">52 produtos</div>
+      </div>
+    </div>
+    <div class="menu-cat-item" onclick="closeMenu();goPage('home')">
+      <div class="menu-cat-icon">🎭</div>
+      <div class="menu-cat-info">
+        <div class="menu-cat-name">Temáticas</div>
+        <div class="menu-cat-qty">Natal, Halloween, São João</div>
+      </div>
+    </div>
+    <div class="menu-cat-item" onclick="closeMenu();goPage('home')">
+      <div class="menu-cat-icon">✨</div>
+      <div class="menu-cat-info">
+        <div class="menu-cat-name">Personalizados</div>
+        <div class="menu-cat-qty">Sob encomenda</div>
+      </div>
+    </div>
+    <div class="menu-cat-item" onclick="closeMenu();goPage('home')">
+      <div class="menu-cat-icon">💍</div>
+      <div class="menu-cat-info">
+        <div class="menu-cat-name">Casamento & Festa</div>
+        <div class="menu-cat-qty">Conjuntos especiais</div>
+      </div>
+    </div>
+  </div>
+  <div class="menu-footer">
+    <p>🐾 Roupas com amor para pets estilosos</p>
+    <p>📍 Salvador, Bahia</p>
+  </div>
+</div>
+
 <nav class="nav">
   <div class="logo" onclick="goPage('home')">
     <img src="logo_petclik.webp" alt="Petclik" style="height:48px;width:auto;cursor:pointer">
@@ -430,7 +505,7 @@ footer{background:var(--dark);padding:22px 16px}
   <div class="nav-right">
     <button class="nav-btn" onclick="goPage('tamanhos')" title="Tamanhos">📏</button>
     <button class="nav-btn" onclick="goPage('carrinho')" style="position:relative">🛍️<span class="nav-badge" id="cartBadge">0</span></button>
-    <button class="nav-btn" onclick="showToast('Menu em breve! ☰')">☰</button>
+    <button class="nav-btn" onclick="openMenu()">☰</button>
   </div>
 </nav>
 
@@ -1064,6 +1139,18 @@ setTimeout(function(){
 
 // ===== TOAST =====
 function showToast(msg){var t=document.getElementById('toast');document.getElementById('toastMsg').textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},3000)}
+
+// ===== MENU LATERAL =====
+function openMenu(){
+  document.getElementById('menuDrawer').classList.add('open');
+  document.getElementById('menuOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeMenu(){
+  document.getElementById('menuDrawer').classList.remove('open');
+  document.getElementById('menuOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
 </script>
 </body>
 </html>
