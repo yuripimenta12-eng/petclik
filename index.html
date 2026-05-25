@@ -556,8 +556,8 @@ footer{background:var(--dark);padding:22px 16px}
     <button class="tab" onclick="setTab(this)">Ofertas</button>
   </div>
   <div class="prods-grid">
-    <div class="p-card anim-up d1" onclick="goPage('personalizar')">
-      <div class="p-img-wrap"><div<class="p-img-real"><img src="produtos/produto1.jpg.png" alt="Produto 1" style="width:100%;height:200px;object-fit:cover;border-radius:12px 12px 0 0;display:block" onerror="this.parentNode.innerHTML='<div style=&quot;display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;background:#f0f9fa;border-radius:12px 12px 0 0;color:#7A7A8A;font-size:11px;gap:6px&quot;><span style=&quot;font-size:2rem&quot;>📷</span><span>produtos/produto1.jpg</span></div>'"></div>
+    <div class="p-card anim-up d1" onclick="selProduct('produtos/produto1.jpg.png','Tecido Tricoline Festa Junina');goPage('personalizar')">
+      <div class="p-img-wrap"><div class="p-img-real"><img src="produtos/produto1.jpg.png" alt="Produto 1" style="width:100%;height:200px;object-fit:cover;border-radius:12px 12px 0 0;display:block" onerror="this.parentNode.innerHTML='<div style=&quot;display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;background:#f0f9fa;border-radius:12px 12px 0 0;color:#7A7A8A;font-size:11px;gap:6px&quot;><span style=&quot;font-size:2rem&quot;>📷</span><span>produtos/produto1.jpg</span></div>'"></div>
       <div class="p-info"><div class="p-name">Tecido Tricoline Festa Junina</div><div class="p-desc">Tecido especial para festas juninas</div><div class="p-foot"><div class="p-price">R$ 28,99</div><button class="add-btn" onclick="event.stopPropagation();addCart('Gravata Xadrez',45.90)">+</button></div></div>
     </div>
     <div class="p-card anim-up d2" onclick="goPage('personalizar')">
@@ -708,7 +708,7 @@ footer{background:var(--dark);padding:22px 16px}
     <span style="font-family:'Fredoka One',serif;font-size:1.05rem;color:var(--dark)">Peça Personalizada ✨</span>
   </div>
 </nav>
-<div class="form-hero"><div class="form-hero-ico">🎨</div><div class="form-hero-ttl">Crie a peça dos sonhos!</div><div class="form-hero-sub">Preencha e entraremos em contato em até 24h</div></div>
+<div class="form-hero"><div id="prodPreview" style="display:none;margin-bottom:10px;text-align:center"><img id="prodPreviewImg" src="" alt="Produto" style="width:140px;height:140px;object-fit:cover;border-radius:16px;border:3px solid var(--teal);box-shadow:0 4px 16px rgba(30,202,212,0.2)"><div id="prodPreviewName" style="font-weight:700;color:var(--dark);margin-top:6px;font-size:0.9rem"></div></div><div class="form-hero-ico" id="heroIco">🎨</div><div class="form-hero-ttl">Crie a peça dos sonhos!</div><div class="form-hero-sub">Preencha e entraremos em contato em até 24h</div></div>
 <div class="form-prog-wrap"><div class="form-prog-lbl">Etapa <span id="stepNum">1</span> de 4</div><div class="form-prog-bar"><div class="fp done" id="fp1"></div><div class="fp" id="fp2"></div><div class="fp" id="fp3"></div><div class="fp" id="fp4"></div></div></div>
 <div class="success-scr" id="formSuccess"><div class="success-em">🎉</div><div class="success-ttl">Pedido enviado!</div><div class="success-sub">Recebemos sua solicitação! Entraremos em contato pelo WhatsApp em até <strong>24 horas</strong> para confirmar os detalhes e o orçamento.</div><button class="checkout-btn" style="max-width:240px;margin-top:16px" onclick="goPage('home')">Voltar à loja 🐾</button></div>
 <div id="formSteps">
@@ -728,7 +728,8 @@ footer{background:var(--dark);padding:22px 16px}
   </div>
   <div class="fstep" id="fstep3">
     <div class="fs"><div class="fl">👔 Tipo de peça</div><div class="chips"><div class="chip on" onclick="selChip(this)">Gravata</div><div class="chip" onclick="selChip(this)">Bandana</div><div class="chip" onclick="selChip(this)">Roupinha</div><div class="chip" onclick="selChip(this)">Laço</div><div class="chip" onclick="selChip(this)">Conjunto</div><div class="chip" onclick="selChip(this)">Outro</div></div></div>
-    <div class="fs"><div class="fl">🎨 Cor principal</div><div class="col-chips"><div class="col-chip on" style="background:#1ECAD4" onclick="selColor(this)"></div><div class="col-chip" style="background:#F03358" onclick="selColor(this)"></div><div class="col-chip" style="background:#F9B8C8" onclick="selColor(this)"></div><div class="col-chip" style="background:#1A1A1A" onclick="selColor(this)"></div><div class="col-chip" style="background:#FFFFFF;border:2px solid #DDD" onclick="selColor(this)"></div><div class="col-chip" style="background:#F4A426" onclick="selColor(this)"></div><div class="col-chip" style="background:#4CAF50" onclick="selColor(this)"></div><div class="col-chip" style="background:#9C27B0" onclick="selColor(this)"></div></div></div>
+    <div class="fs"><div class="fl">📏 Tamanho</div><div class="chip-row"><div class="chip" onclick="selChip(this)">PP</div><div class="chip on" onclick="selChip(this)">P</div><div class="chip" onclick="selChip(this)">M</div><div class="chip" onclick="selChip(this)">G</div><div class="chip" onclick="selChip(this)">GG</div></div></div>
+    <div class="fs"><div class="fl">⚖️ Peso aprox. do pet (kg)</div><input class="finp" type="number" id="petWeight" placeholder="Ex: 5" min="0.5" max="50" step="0.5"></div></div>
     <div class="fs"><div class="fl">📝 Detalhes e personalização</div><textarea class="fta" rows="4" placeholder="Ex: Nome 'Bolinha' bordado em dourado, estampa de ossinhos..." id="detalhes"></textarea></div>
     <div class="fs"><div class="fl">📸 Referência (opcional)</div><div class="upload-zone" onclick="showToast('Envie a foto pelo WhatsApp após o contato! 📸')"><div style="font-size:2rem;margin-bottom:5px;opacity:0.4">📎</div><div style="font-size:0.73rem;color:var(--muted)">Toque para enviar referência<br><span style="font-size:0.62rem;opacity:0.7">Envie a foto pelo WhatsApp após contato</span></div></div></div>
     <div class="fnav"><button class="fbtn-prev" onclick="nextStep(2)">← Voltar</button><button class="fbtn-next" onclick="nextStep(4)">Próximo → Contato</button></div>
@@ -894,7 +895,7 @@ var curPage='home',prevPage='home';
 function goPage(pg){
   prevPage=curPage;curPage=pg;
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
-  var map={home:'pageHome',personalizar:'pagePersonalizar',tamanhos:'pageTamanhos',carrinho:'pageCarrinho'};
+  var map={home:'pageHome',personalizar:'pagePersonalizar',tamanhos:'pageTamanhos',carrinho:'pageCarrinho'};if(pg==='personalizar'){setTimeout(showProductPreview,100);}
   var el=document.getElementById(map[pg]);
   if(el){el.classList.add('active');window.scrollTo(0,0);el.scrollTop=0}
   document.querySelectorAll('.bn').forEach(function(b){b.classList.remove('on')});
@@ -1151,6 +1152,20 @@ function closeMenu(){
   document.getElementById('menuDrawer').classList.remove('open');
   document.getElementById('menuOverlay').classList.remove('open');
   document.body.style.overflow='';
+}
+
+// ===== PRODUTO SELECIONADO =====
+function selProduct(img, nome) {
+  window._selectedProduct = { img, nome };
+}
+function showProductPreview() {
+  const p = window._selectedProduct;
+  if (p && p.img) {
+    document.getElementById('prodPreview').style.display = 'block';
+    document.getElementById('prodPreviewImg').src = p.img;
+    document.getElementById('prodPreviewName').textContent = p.nome || '';
+    document.getElementById('heroIco').style.display = 'none';
+  }
 }
 </script>
 </body>
