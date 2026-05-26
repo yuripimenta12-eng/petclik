@@ -739,7 +739,8 @@ footer{background:var(--dark);padding:22px 16px}
     <div class="fs"><div class="fl">📱 WhatsApp</div><input class="fi" type="tel" placeholder="(71) 99999-9999" id="cliWA"><div class="fhint">Entraremos em contato aqui para confirmar 🐾</div></div>
     <div class="fs"><div class="fl">📍 Cidade</div><div class="chips"><div class="chip on" onclick="selChip(this)">📍 Salvador, BA</div><div class="chip" onclick="selChip(this)">🗺️ Outra cidade</div></div></div>
     <div class="resumo-box" id="resumoPedido"></div>
-    <div class="fnav"><button class="fbtn-prev" onclick="nextStep(3)">← Voltar</button><button class="fbtn-next" onclick="enviarPedido()">Enviar pedido 🎀</button></div>
+    <div class="fs"><div class="fl">💳 Forma de Pagamento</div><select class="finp" id="pagamento" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--teal-l);font-size:0.9rem;background:white;color:var(--dark)"><option value="">Selecione...</option><option value="PIX (5% desconto)">💸 PIX (5% desconto)</option><option value="Cartão de Crédito">💳 Cartão de Crédito</option><option value="Cartão de Débito">💳 Cartão de Débito</option><option value="Boleto Bancário">📄 Boleto Bancário</option><option value="Dinheiro na entrega">💵 Dinheiro na entrega</option></select></div>
+<div class="fnav"><button class="fbtn-prev" onclick="nextStep(3)">← Voltar</button><button class="fbtn-next" onclick="enviarPedido()">Enviar pedido 🎀</button></div>
   </div>
 </div>
 <div class="spacer"></div>
@@ -1100,18 +1101,68 @@ function buildResumo(){
   document.getElementById('resumoPedido').innerHTML='<div style="font-size:0.76rem;font-weight:700;color:var(--teal-d);margin-bottom:6px">📋 Resumo do pedido</div><div style="font-size:0.72rem;color:var(--text);line-height:1.8">🐾 Pet: <strong>'+pet+'</strong><br>'+(a?'🔴 Pescoço: <strong>'+a+'cm</strong><br>':'')+(b?'🟠 Peitoral: <strong>'+b+'cm</strong><br>':'')+(c?'🟡 Comprimento: <strong>'+c+'cm</strong><br>':'')+'📝 '+det.substring(0,60)+(det.length>60?'...':'')+'</div>';
 }
 function enviarPedido(){
-  var nome=document.getElementById('cliNome').value;
-  var wa=document.getElementById('cliWA').value;
-  if(!nome||!wa){showToast('Preencha nome e WhatsApp! 📱');return}
-  var pet=document.getElementById('petName').value;
+  var nome=document.getElementById('cliNome').value.trim();
+  var waCliente=document.getElementById('cliWA').value.trim();
+  if(!nome||!waCliente){showToast('Preencha nome e WhatsApp! 📱');return}
+  var pet=document.getElementById('petName').value||'Não informado';
   var a=document.getElementById('medA').value;
   var b=document.getElementById('medB').value;
   var c=document.getElementById('medC').value;
-  var det=document.getElementById('detalhes').value;
-  var msg='🐾 *Pedido Personalizado – PetClik*\n\n👤 '+nome+'\n📱 '+wa+'\n🐾 Pet: '+(pet||'?')+(a?'\n🔴 Pescoço: '+a+'cm':'')+(b?'\n🟠 Peitoral: '+b+'cm':'')+(c?'\n🟡 Comprimento: '+c+'cm':'')+(det?'\n\n📝 '+det:'');
+  var det=document.getElementById('detalhes').value||'Sem detalhes adicionais';
+  var peso=document.getElementById('petWeight')?document.getElementById('petWeight').value:'';
+  var tamanho=document.querySelector('.chip.on')?.textContent||'Não selecionado';
+  var pagamento=document.getElementById('pagamento')?document.getElementById('pagamento').value:'Não informado';
+  var produto=window._selectedProduct?window._selectedProduct.nome:'Não especificado';
+  var medidas='';
+  if(a) medidas+='🔴 Pescoço: '+a+'cm
+';
+  if(b) medidas+='🟠 Peitoral: '+b+'cm
+';
+  if(c) medidas+='🟡 Comprimento: '+c+'cm
+';
+  var msg=
+'🐾 *NOVO PEDIDO - PetClik* 🐾
+'+
+'━━━━━━━━━━━━━━━━━━━━
+
+'+
+'👤 *CLIENTE*
+'+
+'• Nome: '+nome+'
+'+
+'• WhatsApp: '+waCliente+'
+
+'+
+'🛍️ *PRODUTO DESEJADO*
+'+
+'• '+produto+'
+'+
+'• Tamanho: '+tamanho+'
+
+'+
+'🐶 *PET*
+'+
+'• Nome: '+pet+'
+'+
+(peso?'• Peso: '+peso+'kg
+':'')+'
+'+
+(medidas?'📏 *MEDIDAS*
+'+medidas+'
+':'')+
+'💳 *PAGAMENTO*
+'+
+'• Forma: '+pagamento+'
+
+'+
+(det!='Sem detalhes adicionais'?'📝 *OBSERVAÇÕES*
+'+det+'
+
+':'')+
+'━━━━━━━━━━━━━━━━━━━━
+'+
+'Aguardo confirmação! 😊';
   openWA(msg);
-  document.getElementById('formSteps').style.display='none';
-  document.getElementById('formSuccess').classList.add('show');
 }
 function selPet(el){document.querySelectorAll('.pet-chip').forEach(function(c){c.classList.remove('on')});el.classList.add('on')}
 function selChip(el){el.closest('.chips,.pet-chips').querySelectorAll('.chip,.pet-chip').forEach(function(c){c.classList.remove('on')});el.classList.add('on')}
