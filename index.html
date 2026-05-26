@@ -739,7 +739,8 @@ footer{background:var(--dark);padding:22px 16px}
     <div class="fs"><div class="fl">📱 WhatsApp</div><input class="fi" type="tel" placeholder="(71) 99999-9999" id="cliWA"><div class="fhint">Entraremos em contato aqui para confirmar 🐾</div></div>
     <div class="fs"><div class="fl">📍 Cidade</div><div class="chips"><div class="chip on" onclick="selChip(this)">📍 Salvador, BA</div><div class="chip" onclick="selChip(this)">🗺️ Outra cidade</div></div></div>
     <div class="resumo-box" id="resumoPedido"></div>
-    <div class="fs"><div class="fl">💳 Forma de Pagamento</div><select class="finp" id="pagamento" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--teal-l);font-size:0.9rem;background:white;color:var(--dark)"><option value="">Selecione...</option><option value="PIX (5% desconto)">💸 PIX (5% desconto)</option><option value="Cartão de Crédito">💳 Cartão de Crédito</option><option value="Cartão de Débito">💳 Cartão de Débito</option><option value="Boleto Bancário">📄 Boleto Bancário</option><option value="Dinheiro na entrega">💵 Dinheiro na entrega</option></select></div>
+    <div class="fs"><div class="fl">🎟️ Cupom de Desconto <span style="font-size:0.75rem;color:var(--muted)">(opcional)</span></div><div style="display:flex;gap:8px"><input class="finp" type="text" id="cupomPedido" placeholder="Ex: PETCLIK10" style="flex:1;text-transform:uppercase" oninput="this.value=this.value.toUpperCase()"><button onclick="aplicarCupomPedido()" style="background:var(--teal);color:white;border:none;border-radius:10px;padding:0 16px;font-weight:700;cursor:pointer;font-size:0.85rem">Aplicar</button></div><div id="cupomMsg" style="font-size:0.8rem;margin-top:6px;display:none"></div></div>
+<div class="fs"><div class="fl">💳 Forma de Pagamento</div><select class="finp" id="pagamento" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--teal-l);font-size:0.9rem;background:white;color:var(--dark)"><option value="">Selecione...</option><option value="PIX (5% desconto)">💸 PIX (5% desconto)</option><option value="Cartão de Crédito">💳 Cartão de Crédito</option><option value="Cartão de Débito">💳 Cartão de Débito</option><option value="Boleto Bancário">📄 Boleto Bancário</option><option value="Dinheiro na entrega">💵 Dinheiro na entrega</option></select></div>
 <div class="fnav"><button class="fbtn-prev" onclick="nextStep(3)">← Voltar</button><button class="fbtn-next" onclick="enviarPedido()">Enviar pedido 🎀</button></div>
   </div>
 </div>
@@ -1153,7 +1154,8 @@ function enviarPedido(){
 '💳 *PAGAMENTO*
 '+
 '• Forma: '+pagamento+'
-
+'+(window._cupomAplicado?'• Cupom: '+window._cupomAplicado.codigo+' ('+window._cupomAplicado.desconto+')
+':'')+'
 '+
 (det!='Sem detalhes adicionais'?'📝 *OBSERVAÇÕES*
 '+det+'
@@ -1216,6 +1218,25 @@ function showProductPreview() {
     document.getElementById('prodPreviewImg').src = p.img;
     document.getElementById('prodPreviewName').textContent = p.nome || '';
     document.getElementById('heroIco').style.display = 'none';
+  }
+}
+
+// ===== CUPOM NO PEDIDO =====
+function aplicarCupomPedido(){
+  var cod = document.getElementById('cupomPedido').value.trim().toUpperCase();
+  var msg = document.getElementById('cupomMsg');
+  var cupons = {'PETCLIK10':{p:0.10,l:'10% de desconto'},'PET5':{p:0.05,l:'5% de desconto'},'FRETEGRATIS':{p:0,l:'Frete Grátis'}};
+  if(!cod){ msg.style.display='none'; return; }
+  if(cupons[cod]){
+    msg.style.display='block';
+    msg.style.color='#25A244';
+    msg.textContent='✅ Cupom aplicado: ' + cupons[cod].l;
+    window._cupomAplicado = {codigo: cod, desconto: cupons[cod].l};
+  } else {
+    msg.style.display='block';
+    msg.style.color='#F03358';
+    msg.textContent='❌ Cupom inválido ou expirado';
+    window._cupomAplicado = null;
   }
 }
 </script>
