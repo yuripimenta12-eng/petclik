@@ -44,10 +44,10 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#FDFEFF;color:var(--t
 .quick-banner{background:linear-gradient(90deg,var(--teal),var(--teal-d));color:white;text-align:center;padding:7px 16px;font-size:0.72rem;font-weight:600;flex-shrink:0}
 
 /* ===================== CAROUSEL ===================== */
-.carousel-wrap{position:relative;overflow:hidden;background:var(--teal-d);flex-shrink:0;width:100%}
+.carousel-wrap{position:relative;overflow:hidden;background:var(--teal-d);flex-shrink:0;width:100%;aspect-ratio:16/9}
 .carousel-track{display:flex;height:100%;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)}
 .slide{min-width:100%;position:relative;overflow:hidden;flex-shrink:0;width:100%}
-.slide img{width:100%;height:auto;display:block;max-height:60vw}
+.slide img{width:100%;height:100%;display:block;object-fit:contain}
 .carousel-dots{display:flex;justify-content:center;gap:5px;padding:8px 0;background:var(--teal-ll);flex-shrink:0}
 .dot{width:18px;height:3px;border-radius:2px;background:rgba(30,202,212,0.3);transition:all 0.3s;cursor:pointer}
 .dot.active{width:30px;background:var(--teal)}
@@ -513,12 +513,12 @@ footer{background:var(--dark);padding:22px 16px}
 
 <div class="carousel-wrap" id="carWrap">
   <div class="carousel-track" id="carTrack">
-    <div class="slide"><img src="carrossel/banner2.jpg" alt="Banner 1" style="width:100%;height:100%;object-fit:cover" onerror="this.src=''" loading="lazy"></div>
-    <div class="slide"><img src="carrossel/banner1.jpg" alt="Banner 1" style="width:100%;height:100%;object-fit:cover" onerror="this.src=''" loading="lazy"></div>
-    <div class="slide"><img src="carrossel/banner6.jpg" alt="Banner 6" style="width:100%;height:100%;object-fit:cover" onerror="this.src=''" loading="lazy"></div>
-    <div class="slide"><img src="carrossel/banner7.jpg" alt="Banner 7" style="width:100%;height:100%;object-fit:cover" onerror="this.src=''" loading="lazy"></div>
-    <div class="slide"><img src="carrossel/banner5.jpg" alt="Banner 5" style="width:100%;height:100%;object-fit:cover" onerror="this.src=''" loading="lazy"></div>
-    <div class="slide"><img src="carrossel/banner3.jpg" alt="Banner 6" style="width:100%;height:100%;object-fit:cover" onerror="this.src=''" loading="lazy"></div>
+    <div class="slide"><img src="carrossel/banner2.jpg" alt="Banner 1" style="width:100%;height:100%;object-fit:contain" onerror="this.src=''" loading="lazy"></div>
+    <div class="slide"><img src="carrossel/banner1.jpg" alt="Banner 1" style="width:100%;height:100%;object-fit:contain" onerror="this.src=''" loading="lazy"></div>
+    <div class="slide"><img src="carrossel/banner6.jpg" alt="Banner 6" style="width:100%;height:100%;object-fit:contain" onerror="this.src=''" loading="lazy"></div>
+    <div class="slide"><img src="carrossel/banner7.jpg" alt="Banner 7" style="width:100%;height:100%;object-fit:contain" onerror="this.src=''" loading="lazy"></div>
+    <div class="slide"><img src="carrossel/banner5.jpg" alt="Banner 5" style="width:100%;height:100%;object-fit:contain" onerror="this.src=''" loading="lazy"></div>
+    <div class="slide"><img src="carrossel/banner3.jpg" alt="Banner 6" style="width:100%;height:100%;object-fit:contain" onerror="this.src=''" loading="lazy"></div>
   </div>
   <button class="arr arr-prev" onclick="moveCar(-1)">‹</button>
   <button class="arr arr-next" onclick="moveCar(1)">›</button>
