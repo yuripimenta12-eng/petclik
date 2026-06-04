@@ -720,6 +720,7 @@ footer{background:var(--dark);padding:22px 16px}
     <div class="fs"><div class="fl">🐾 Tipo de pet</div><div class="pet-chips"><div class="pet-chip on" onclick="selPet(this)">🐶 Cachorro</div><div class="pet-chip" onclick="selPet(this)">🐱 Gato</div><div class="pet-chip" onclick="selPet(this)">🐰 Outro</div></div></div>
     <div class="fs"><div class="fl">📛 Nome do pet</div><input class="fi" type="text" placeholder="Ex: Bolinha, Mel, Thor..." id="petName"></div>
     <div class="fs"><div class="fl">⚖️ Peso aproximado</div><div class="chips"><div class="chip on" onclick="selChip(this)">Até 2kg</div><div class="chip" onclick="selChip(this)">2–5kg</div><div class="chip" onclick="selChip(this)">5–10kg</div><div class="chip" onclick="selChip(this)">10–20kg</div><div class="chip" onclick="selChip(this)">+20kg</div></div><div class="fhint">💡 Dúvida? <span style="color:var(--teal);cursor:pointer;font-weight:600" onclick="goPage('tamanhos')">Guia de tamanhos →</span></div></div>
+    <div class="fs"><div class="fl">📝 Detalhes e personalização</div><textarea class="fta" rows="4" placeholder="Ex: Nome 'Bolinha' bordado em dourado, estampa de ossinhos..." id="detalhes"></textarea></div>
     <div class="fnav"><button class="fbtn-next" onclick="nextStep(2)">Próximo → Medidas</button></div>
   </div>
   <div class="fstep" id="fstep2">
@@ -731,23 +732,36 @@ footer{background:var(--dark);padding:22px 16px}
     <div class="fnav"><button class="fbtn-prev" onclick="nextStep(1)">← Voltar</button><button class="fbtn-next" onclick="nextStep(3)">Próximo → Estilo</button></div>
   </div>
   <div class="fstep" id="fstep3">
+    <div class="fs"><div id="prodSelEt3" style="display:none;background:var(--teal-ll);border-radius:var(--r);padding:11px 13px;margin-bottom:13px;border:1px solid var(--teal-l)"><div style="font-size:0.68rem;color:var(--teal-d);font-weight:700;text-transform:uppercase;letter-spacing:0.5px">🛍️ Produto selecionado</div><div id="prodSelEt3Nome" style="font-size:0.92rem;color:var(--dark);font-weight:700;margin-top:3px"></div></div></div>
     <div class="fs"><div class="fl">👔 Tipo de peça</div><div class="chips"><div class="chip on" onclick="selChip(this)">Gravata</div><div class="chip" onclick="selChip(this)">Bandana</div><div class="chip" onclick="selChip(this)">Roupinha</div><div class="chip" onclick="selChip(this)">Laço</div><div class="chip" onclick="selChip(this)">Conjunto</div><div class="chip" onclick="selChip(this)">Outro</div></div></div>
     <div class="fs"><div class="fl">📏 Tamanho</div><div class="size-price-row" id="sizePriceRow" style="display:flex;gap:7px;flex-wrap:wrap"><div class="szp" data-sz="PP" onclick="selSize(this)" style="flex:1;min-width:58px;text-align:center;border:2px solid var(--teal-l);background:#fff;border-radius:12px;padding:9px 4px;cursor:pointer"><div class="szp-n" style="font-weight:800;font-size:0.95rem;color:var(--dark)">PP</div><div class="szp-p" style="font-size:0.72rem;color:var(--muted);margin-top:2px">R$ 17</div></div><div class="szp on" data-sz="P" onclick="selSize(this)" style="flex:1;min-width:58px;text-align:center;border:2px solid var(--teal);background:var(--teal);border-radius:12px;padding:9px 4px;cursor:pointer"><div class="szp-n" style="font-weight:800;font-size:0.95rem;color:#fff">P</div><div class="szp-p" style="font-size:0.72rem;color:#fff;margin-top:2px">R$ 20</div></div><div class="szp" data-sz="M" onclick="selSize(this)" style="flex:1;min-width:58px;text-align:center;border:2px solid var(--teal-l);background:#fff;border-radius:12px;padding:9px 4px;cursor:pointer"><div class="szp-n" style="font-weight:800;font-size:0.95rem;color:var(--dark)">M</div><div class="szp-p" style="font-size:0.72rem;color:var(--muted);margin-top:2px">R$ 22</div></div><div class="szp" data-sz="G" onclick="selSize(this)" style="flex:1;min-width:58px;text-align:center;border:2px solid var(--teal-l);background:#fff;border-radius:12px;padding:9px 4px;cursor:pointer"><div class="szp-n" style="font-weight:800;font-size:0.95rem;color:var(--dark)">G</div><div class="szp-p" style="font-size:0.72rem;color:var(--muted);margin-top:2px">R$ 25</div></div><div class="szp" data-sz="GG" onclick="selSize(this)" style="flex:1;min-width:58px;text-align:center;border:2px solid var(--teal-l);background:#fff;border-radius:12px;padding:9px 4px;cursor:pointer"><div class="szp-n" style="font-weight:800;font-size:0.95rem;color:var(--dark)">GG</div><div class="szp-p" style="font-size:0.72rem;color:var(--muted);margin-top:2px">R$ 30</div></div></div></div>
-    <div class="fs"><div class="fl">⚖️ Peso aprox. do pet (kg)</div><input class="finp" type="number" id="petWeight" placeholder="Ex: 5" min="0.5" max="50" step="0.5"></div></div>
-    <div class="fs"><div class="fl">📝 Detalhes e personalização</div><textarea class="fta" rows="4" placeholder="Ex: Nome 'Bolinha' bordado em dourado, estampa de ossinhos..." id="detalhes"></textarea></div>
-    <div class="fs"><div class="fl">📸 Referência (opcional)</div><div class="upload-zone" onclick="showToast('Envie a foto pelo WhatsApp após o contato! 📸')"><div style="font-size:2rem;margin-bottom:5px;opacity:0.4">📎</div><div style="font-size:0.73rem;color:var(--muted)">Toque para enviar referência<br><span style="font-size:0.62rem;opacity:0.7">Envie a foto pelo WhatsApp após contato</span></div></div></div>
     <div class="fnav"><button class="fbtn-prev" onclick="nextStep(2)">← Voltar</button><button class="fbtn-next" onclick="nextStep(4)">Próximo → Contato</button></div>
   </div>
   <div class="fstep" id="fstep4">
     <div class="fs"><div class="fl">👤 Seu nome</div><input class="fi" type="text" placeholder="Nome completo" id="cliNome"></div>
     <div class="fs"><div class="fl">📱 WhatsApp</div><input class="fi" type="tel" placeholder="(71) 99999-9999" id="cliWA"><div class="fhint">Entraremos em contato aqui para confirmar 🐾</div></div>
-    <div class="fs"><div class="fl">📍 Cidade</div><div class="chips"><div class="chip on" onclick="selChip(this)">📍 Salvador, BA</div><div class="chip" onclick="selChip(this)">🗺️ Outra cidade</div></div></div>
-    <div class="resumo-box" id="resumoPedido"></div>
-    <div class="fs"><div class="fl">🎟️ Cupom de Desconto <span style="font-size:0.75rem;color:var(--muted)">(opcional)</span></div><div style="display:flex;gap:8px"><input class="finp" type="text" id="cupomPedido" placeholder="Ex: PETCLIK10" style="flex:1;text-transform:uppercase" oninput="this.value=this.value.toUpperCase()"><button onclick="aplicarCupomPedido()" style="background:var(--teal);color:white;border:none;border-radius:10px;padding:0 16px;font-weight:700;cursor:pointer;font-size:0.85rem">Aplicar</button></div><div id="cupomMsg" style="font-size:0.8rem;margin-top:6px;display:none"></div></div>
-<div class="fs"><div class="fl">💳 Forma de Pagamento</div><select class="finp" id="pagamento" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--teal-l);font-size:0.9rem;background:white;color:var(--dark)"><option value="">Selecione...</option><option value="PIX (5% desconto)">💸 PIX (5% desconto)</option><option value="Cartão de Crédito">💳 Cartão de Crédito</option><option value="Cartão de Débito">💳 Cartão de Débito</option><option value="Boleto Bancário">📄 Boleto Bancário</option><option value="Dinheiro na entrega">💵 Dinheiro na entrega</option></select></div>
-<div class="fnav"><button class="fbtn-prev" onclick="nextStep(3)">← Voltar</button><button class="fbtn-next" onclick="enviarPedido()">Enviar pedido 🎀</button></div>
+    <div class="fs"><div class="fl">🚚 Entrega — Onde você está?</div>
+      <div class="chips" style="margin-bottom:12px"><div class="chip on" onclick="selCidade(this,'Salvador, BA')">📍 Salvador, BA</div><div class="chip" onclick="selCidade(this,'Outra cidade')">🗺️ Outra cidade</div></div>
+      <div id="entregaSalvador">
+        <div style="background:var(--teal-ll);border-radius:var(--r);padding:11px 13px;margin-bottom:11px"><div style="font-size:0.8rem;font-weight:700;color:var(--teal-d)">🛵 Entrega por Motoboy Uber Flash!</div><div style="font-size:0.7rem;color:var(--muted);margin-top:4px;line-height:1.5">Para Salvador oferecemos entrega via <strong>Uber Flash</strong>. O valor é calculado direto no app da Uber no momento da entrega.</div></div>
+        <div class="ent-opt on" data-ent="Motoboy – Uber Flash" onclick="selEntrega(this)" style="border:2px solid var(--dark);border-radius:14px;padding:13px;margin-bottom:9px;cursor:pointer;display:flex;align-items:center;gap:11px"><div class="ent-radio" style="width:18px;height:18px;border-radius:50%;border:2px solid var(--dark);flex-shrink:0;display:flex;align-items:center;justify-content:center"><div style="width:9px;height:9px;border-radius:50%;background:var(--dark)"></div></div><div style="flex:1"><div style="font-weight:700;color:var(--dark);font-size:0.85rem">🛵 Motoboy – Uber Flash <span style="background:var(--dark);color:#fff;font-size:0.6rem;padding:2px 7px;border-radius:6px;margin-left:4px;vertical-align:middle">UBER</span></div><div style="font-size:0.68rem;color:var(--muted);margin-top:2px">Mesmo dia · Salvador, BA</div></div><div style="font-weight:700;color:var(--dark);font-size:0.78rem;text-align:right;line-height:1.3">Calculado<br>no app Uber</div></div>
+        <div class="ent-opt" data-ent="Retirada no local" onclick="selEntrega(this)" style="border:2px solid var(--teal-l);border-radius:14px;padding:13px;margin-bottom:9px;cursor:pointer;display:flex;align-items:center;gap:11px"><div class="ent-radio" style="width:18px;height:18px;border-radius:50%;border:2px solid var(--teal-l);flex-shrink:0"></div><div style="flex:1"><div style="font-weight:700;color:var(--dark);font-size:0.85rem">🏠 Retirada no local</div><div style="font-size:0.68rem;color:var(--muted);margin-top:2px">Salvador, BA · Combinar horário</div></div><div style="font-weight:800;color:#27ae60;font-size:0.95rem;font-family:'Fredoka One',sans-serif">Grátis</div></div>
+        <div style="background:#FFF8E1;border:1px solid #FFE082;border-radius:12px;padding:11px;font-size:0.7rem;color:#8a6d00;line-height:1.5"><strong>💡 Como funciona:</strong> Após confirmar pelo WhatsApp, você abre o app <strong>Uber Flash</strong>, coloca nosso endereço de origem e o seu destino. O frete aparece antes de confirmar!</div>
+      </div>
+    </div>
+    <div class="fs"><div class="fl">🎟️ Cupom de Desconto <span style="font-size:0.75rem;color:var(--muted)">(opcional)</span></div><div style="display:flex;gap:8px"><input class="finp" type="text" id="cupomPedido" placeholder="" style="flex:1;text-transform:uppercase" oninput="this.value=this.value.toUpperCase()"><button onclick="aplicarCupomPedido()" style="background:var(--teal);color:white;border:none;border-radius:10px;padding:0 16px;font-weight:700;cursor:pointer;font-size:0.85rem">Aplicar</button></div><div id="cupomMsg" style="font-size:0.8rem;margin-top:6px;display:none"></div></div>
+    <div class="fs"><div class="fl">💳 Forma de Pagamento</div><select class="finp" id="pagamento" onchange="atualizarResumo()" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--teal-l);font-size:0.9rem;background:white;color:var(--dark)"><option value="">Selecione...</option><option value="PIX">💸 PIX</option><option value="Cartão de Crédito">💳 Cartão de Crédito</option><option value="Cartão de Débito">💳 Cartão de Débito</option><option value="Boleto Bancário">📄 Boleto Bancário</option><option value="Dinheiro na entrega">💵 Dinheiro na entrega</option></select></div>
+    <div class="fs"><div class="fl">📋 Resumo</div>
+      <div style="border:1px solid var(--teal-l);border-radius:14px;padding:14px">
+        <div style="display:flex;justify-content:space-between;font-size:0.82rem;color:var(--muted);margin-bottom:9px"><span>Subtotal (<span id="resQtd">1</span> item)</span><span id="resSubtotal" style="color:var(--dark);font-weight:600">R$ 20,00</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:0.82rem;color:var(--muted);margin-bottom:9px"><span>Frete</span><span style="color:var(--dark);font-weight:600" id="resFrete">Calculado no Uber</span></div>
+        <div style="border-top:1px solid var(--teal-l);margin:9px 0;padding-top:9px;display:flex;justify-content:space-between;align-items:center"><span style="font-weight:800;color:var(--dark);font-size:1rem">Total</span><span id="resTotal" style="font-family:'Fredoka One',sans-serif;color:var(--red);font-size:1.25rem">R$ 20,00 + Uber</span></div>
+      </div>
+    </div>
+    <div class="fnav"><button class="fbtn-prev" onclick="nextStep(3)">← Voltar</button><button class="fbtn-next" onclick="enviarPedido()">Finalizar pedido 🎀</button></div>
   </div>
 
+</div>
 </div>
 <div class="spacer"></div>
 
@@ -849,9 +863,7 @@ footer{background:var(--dark);padding:22px 16px}
       <div class="rrow"><span class="rlbl">Subtotal (<span id="rQtd">0</span> itens)</span><span class="rval" id="rSub">R$ 0,00</span></div>
       <div class="rrow" id="rDescontoRow" style="display:none"><span class="rlbl">Desconto cupom</span><span class="rval green" id="rDesconto">− R$ 0,00</span></div>
       <div class="rrow"><span class="rlbl">Frete</span><span class="rval" id="rFrete">Selecione acima</span></div>
-      <div class="rrow"><span class="rlbl">PIX (5% off)</span><span class="rval green" id="rPix">−</span></div>
       <div class="rtotal"><span class="rtotal-lbl">Total</span><span class="rtotal-val" id="rTotal">R$ 0,00</span></div>
-      <div class="pix-badge">⚡ PIX tem 5% de desconto extra!</div>
     </div>
   </div>
   <div style="height:80px"></div>
@@ -985,10 +997,9 @@ function updateResumo(){
   document.getElementById('rSub').textContent=fmt(sub);
   var total=sub-desconto;
   var frLabel='Selecione acima';
-  if(freteSelected==='uber'){frLabel='Calculado no Uber';document.getElementById('rPix').textContent='−'}
-  else if(freteSelected==='retirada'){frLabel='Grátis';var px=total*0.05;document.getElementById('rPix').textContent='− '+fmt(px);total-=px}
-  else if(freteVal!==null){total+=freteVal;frLabel=freteVal===0?'Grátis':fmt(freteVal);var px=total*0.05;document.getElementById('rPix').textContent='− '+fmt(px);total-=px}
-  else{document.getElementById('rPix').textContent='−'}
+  if(freteSelected==='uber'){frLabel='Calculado no Uber'}
+  else if(freteSelected==='retirada'){frLabel='Grátis'}
+  else if(freteVal!==null){total+=freteVal;frLabel=freteVal===0?'Grátis':fmt(freteVal)}
   document.getElementById('rFrete').textContent=frLabel;
   var totalStr=freteSelected==='uber'?fmt(sub-desconto)+' + Uber':fmt(Math.max(0,total));
   document.getElementById('rTotal').textContent=totalStr;
@@ -1098,14 +1109,49 @@ function nextStep(n){
   document.getElementById('pagePersonalizar').scrollTop=0;window.scrollTo(0,0);
 }
 function buildResumo(){
-  var pet=document.getElementById('petName').value||'Não informado';
-  var a=document.getElementById('medA').value;
-  var b=document.getElementById('medB').value;
-  var c=document.getElementById('medC').value;
-  var det=document.getElementById('detalhes').value||'Não informado';
-  document.getElementById('resumoPedido').innerHTML='<div style="font-size:0.76rem;font-weight:700;color:var(--teal-d);margin-bottom:6px">📋 Resumo do pedido</div><div style="font-size:0.72rem;color:var(--text);line-height:1.8">🐾 Pet: <strong>'+pet+'</strong><br>'+(a?'🔴 Pescoço: <strong>'+a+'cm</strong><br>':'')+(b?'🟠 Peitoral: <strong>'+b+'cm</strong><br>':'')+(c?'🟡 Comprimento: <strong>'+c+'cm</strong><br>':'')+'📝 '+det.substring(0,60)+(det.length>60?'...':'')+'</div>';
+  atualizarResumo();
 }
-function enviarPedido(){var nome=document.getElementById('cliNome').value.trim();var waCliente=document.getElementById('cliWA').value.trim();if(!nome||!waCliente){showToast('Preencha nome e WhatsApp! 📱');return}var pet=document.getElementById('petName').value||'Nao informado';var a=document.getElementById('medA').value;var b=document.getElementById('medB').value;var c=document.getElementById('medC').value;var det=document.getElementById('detalhes').value||'';var peso=document.getElementById('petWeight')?document.getElementById('petWeight').value:'';var tamanho=window._tamanhoSel||'Nao selecionado';var precoSel=window._precoSel?('R$ '+window._precoSel+',00'):'';var pagamento=document.getElementById('pagamento')?document.getElementById('pagamento').value:'Nao informado';var produto=window._selectedProduct?window._selectedProduct.nome:'Nao especificado';var medidas='';if(a)medidas+='🔴 Pescoco: '+a+'cm\n';if(b)medidas+='🟠 Peitoral: '+b+'cm\n';if(c)medidas+='🟡 Comprimento: '+c+'cm\n';var cupom=window._cupomAplicado?'\n• Cupom: '+window._cupomAplicado.codigo+' ('+window._cupomAplicado.desconto+')':'';var msg='🐾 *NOVO PEDIDO - PetClik* 🐾\n'+'━━━━━━━━━━━━━━━━━━━━\n\n'+'👤 *CLIENTE*\n'+'• Nome: '+nome+'\n'+'• WhatsApp: '+waCliente+'\n\n'+'🛍️ *PRODUTO*\n'+'• '+produto+'\n'+'• Tamanho: '+tamanho+(precoSel?' — '+precoSel:'')+'\n\n'+'🐶 *PET*\n'+'• Nome: '+pet+'\n'+(peso?'• Peso: '+peso+'kg\n':'')+'\n'+(medidas?'📏 *MEDIDAS*\n'+medidas+'\n':'')+'💳 *PAGAMENTO*\n'+'• Forma: '+pagamento+cupom+'\n\n'+(det?'📝 *OBSERVACOES*\n'+det+'\n\n':'')+'━━━━━━━━━━━━━━━━━━━━\n'+'Aguardo confirmacao! 😊';openWA(msg);}
+window._entregaSel = 'Motoboy – Uber Flash';
+window._cidadeSel = 'Salvador, BA';
+function selCidade(el, cidade){
+  var row = el.parentNode;
+  row.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
+  el.classList.add('on');
+  window._cidadeSel = cidade;
+  // mostrar/ocultar bloco de entrega Salvador
+  var bloco = document.getElementById('entregaSalvador');
+  if (bloco) bloco.style.display = (cidade === 'Salvador, BA') ? 'block' : 'none';
+  atualizarResumo();
+}
+function selEntrega(el){
+  document.querySelectorAll('.ent-opt').forEach(function(o){
+    o.classList.remove('on');
+    o.style.border = '2px solid var(--teal-l)';
+    var r = o.querySelector('.ent-radio');
+    r.style.border = '2px solid var(--teal-l)';
+    r.innerHTML = '';
+  });
+  el.classList.add('on');
+  el.style.border = '2px solid var(--dark)';
+  var radio = el.querySelector('.ent-radio');
+  radio.style.border = '2px solid var(--dark)';
+  radio.innerHTML = '<div style="width:9px;height:9px;border-radius:50%;background:var(--dark)"></div>';
+  window._entregaSel = el.getAttribute('data-ent');
+  atualizarResumo();
+}
+function atualizarResumo(){
+  var preco = window._precoSel || 0;
+  var sub = document.getElementById('resSubtotal');
+  var tot = document.getElementById('resTotal');
+  var freteEl = document.getElementById('resFrete');
+  if (!sub || !tot) return;
+  var retirada = (window._entregaSel === 'Retirada no local');
+  sub.textContent = 'R$ ' + preco + ',00';
+  if (freteEl) freteEl.textContent = retirada ? 'Grátis' : 'Calculado no Uber';
+  var totalStr = 'R$ ' + preco + ',00';
+  tot.textContent = retirada ? totalStr : (totalStr + ' + Uber');
+}
+function enviarPedido(){var nome=document.getElementById('cliNome').value.trim();var waCliente=document.getElementById('cliWA').value.trim();if(!nome||!waCliente){showToast('Preencha nome e WhatsApp! 📱');return}var pet=document.getElementById('petName').value||'Nao informado';var a=document.getElementById('medA').value;var b=document.getElementById('medB').value;var c=document.getElementById('medC').value;var det=document.getElementById('detalhes').value||'';var peso=document.getElementById('petWeight')?document.getElementById('petWeight').value:'';var tamanho=window._tamanhoSel||'Nao selecionado';var precoSel=window._precoSel?('R$ '+window._precoSel+',00'):'';var pagamento=document.getElementById('pagamento')?document.getElementById('pagamento').value:'Nao informado';var produto=window._selectedProduct?window._selectedProduct.nome:'Nao especificado';var medidas='';if(a)medidas+='🔴 Pescoco: '+a+'cm\n';if(b)medidas+='🟠 Peitoral: '+b+'cm\n';if(c)medidas+='🟡 Comprimento: '+c+'cm\n';var cupom=window._cupomAplicado?'\n• Cupom: '+window._cupomAplicado.codigo+' ('+window._cupomAplicado.desconto+')':'';var entrega=window._entregaSel||'Nao informado';var cidade=window._cidadeSel||'Nao informado';var msg='🐾 *NOVO PEDIDO - PetClik* 🐾\n'+'━━━━━━━━━━━━━━━━━━━━\n\n'+'👤 *CLIENTE*\n'+'• Nome: '+nome+'\n'+'• WhatsApp: '+waCliente+'\n\n'+'🛍️ *PRODUTO*\n'+'• '+produto+'\n'+'• Tamanho: '+tamanho+(precoSel?' — '+precoSel:'')+'\n\n'+'🐶 *PET*\n'+'• Nome: '+pet+'\n'+(peso?'• Peso: '+peso+'kg\n':'')+'\n'+(medidas?'📏 *MEDIDAS*\n'+medidas+'\n':'')+'🚚 *ENTREGA*\n'+'• Local: '+cidade+'\n'+'• Forma: '+entrega+'\n\n'+'💳 *PAGAMENTO*\n'+'• Forma: '+pagamento+cupom+'\n\n'+(det?'📝 *OBSERVACOES*\n'+det+'\n\n':'')+'━━━━━━━━━━━━━━━━━━━━\n'+'Aguardo confirmacao! 😊';openWA(msg);}
 function selPet(el){document.querySelectorAll('.pet-chip').forEach(function(c){c.classList.remove('on')});el.classList.add('on')}
 function selChip(el){el.closest('.chips,.pet-chips').querySelectorAll('.chip,.pet-chip').forEach(function(c){c.classList.remove('on')});el.classList.add('on')}
 function selColor(el){document.querySelectorAll('.col-chip').forEach(function(c){c.classList.remove('on')});el.classList.add('on')}
@@ -1178,6 +1224,9 @@ function showProductPreview() {
     document.getElementById('prodPreview').style.display = 'block';
     document.getElementById('prodPreviewName').textContent = p.nome || '';
     document.getElementById('heroIco').style.display = 'none';
+    var et3 = document.getElementById('prodSelEt3');
+    var et3n = document.getElementById('prodSelEt3Nome');
+    if (et3 && et3n) { et3n.textContent = p.nome || ''; et3.style.display = (p.nome ? 'block' : 'none'); }
     window._ppvImgs = p.imgs;
     window._ppvIndex = 0;
     var imgEls = document.querySelectorAll('.ppv-img');
@@ -1240,6 +1289,7 @@ function selSize(el){
   var sz = el.getAttribute('data-sz');
   window._tamanhoSel = sz;
   window._precoSel = window._tabelaPrecos[sz];
+  if (typeof atualizarResumo === 'function') atualizarResumo();
 }
 
 // ===== CUPOM NO PEDIDO =====
