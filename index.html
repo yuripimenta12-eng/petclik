@@ -44,10 +44,10 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:#FDFEFF;color:var(--t
 .quick-banner{background:linear-gradient(90deg,var(--teal),var(--teal-d));color:white;text-align:center;padding:7px 16px;font-size:0.72rem;font-weight:600;flex-shrink:0}
 
 /* ===================== CAROUSEL ===================== */
-.carousel-wrap{position:relative;overflow:hidden;background:var(--teal-d);flex-shrink:0;width:100%;aspect-ratio:16/9}
+.carousel-wrap{position:relative;overflow:hidden;background:var(--teal-d);flex-shrink:0;width:100%;height:220px}
 .carousel-track{display:flex;height:100%;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)}
-.slide{min-width:100%;position:relative;overflow:hidden;flex-shrink:0;width:100%}
-.slide img{width:100%;height:100%;display:block;object-fit:contain}
+.slide{min-width:100%;height:100%;position:relative;overflow:hidden;flex-shrink:0;width:100%}
+.slide img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
 .carousel-dots{display:flex;justify-content:center;gap:5px;padding:8px 0;background:var(--teal-ll);flex-shrink:0}
 .dot{width:18px;height:3px;border-radius:2px;background:rgba(30,202,212,0.3);transition:all 0.3s;cursor:pointer}
 .dot.active{width:30px;background:var(--teal)}
@@ -431,6 +431,10 @@ footer{background:var(--dark);padding:22px 16px}
 .menu-cat-qty{font-size:0.75rem;color:var(--muted)}
 .menu-footer{padding:16px;border-top:1px solid var(--teal-l);text-align:center}
 .menu-footer p{font-size:0.75rem;color:var(--muted)}
+
+/* ===== CARROSSEL RESPONSIVO ===== */
+@media(min-width:430px){.carousel-wrap{height:260px}}
+@media(min-width:600px){.carousel-wrap{height:320px}}
 </style>
 
 <!-- FONTES -->
